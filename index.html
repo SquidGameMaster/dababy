@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DaBaby Meme with Pie Chart & Footer</title>
+  <style>
+    /* Basic reset & global styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      font-family: sans-serif;
+      background: #000;
+      color: #fff;
+      overflow-x: hidden; /* Hide horizontal scroll from carousel */
+    }
+
+    /* Hero container */
+    .hero-container {
+      position: relative;
+      width: 100%;
+      height: 891px; /* from your original code */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .hero-content {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* anBn.png background */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 110%;
+      height: 882.086px;
+      overflow: visible;
+    }
+    .hero-bg img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* Dark overlay */
+    .hero-overlay {
+      background-color: rgba(0, 0, 0, 0.5);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 801.898px;
+    }
+
+    /* Title, button, address in hero */
+    .title-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .dababy-title {
+      font-family: Montserrat, sans-serif;
+      font-size: 100px;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: -2.2px;
+      line-height: 120px;
+      margin: 0;
+      text-align: center;
+    }
+    .buy-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #000;
+      border: 1px solid rgba(163, 163, 163, 0.24);
+      border-radius: 50px;
+      padding: 12px 20px;
+      text-decoration: none;
+      color: #fff;
+      font-family: Montserrat, sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .buy-button-icon {
+      background-color: #fff;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px;
+      height: 22px;
+      padding: 4px;
+    }
+    .buy-button-icon svg {
+      width: 14px;
+      height: 14px;
+      fill: #000;
+    }
+
+    /* Contract address box */
+    .solana-address {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .solana-address h4 {
+      font-family: Montserrat, sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      margin: 0;
+    }
+    .solana-address-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+      background-color: #f3f3f3;
+      border-radius: 8px;
+      padding: 10px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      min-width: 500px;
+    }
+    .solana-address-box input {
+      flex-grow: 1;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      font-size: 16px;
+      color: #000;
+      cursor: pointer;
+    }
+    .solana-address-box button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      margin-left: 10px;
+      font-size: 12px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+    }
+    /* Toast/notification in CA box */
+    #copyToast {
+      display: none;
+      position: absolute;
+      bottom: -40px; 
+      left: 0;
+      padding: 8px 12px;
+      border-radius: 4px;
+      background-color: #333;
+      color: #fff;
+      font-size: 14px;
+      font-family: sans-serif;
+      transition: opacity 0.3s ease;
+      z-index: 99;
+    }
+
+    /* OFFICIAL MEME carousel */
+    .infinite-carousel {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+    .carousel-track {
+      display: flex;
+      width: max-content;
+      animation: scroll-left 15s linear infinite;
+    }
+    @keyframes scroll-left {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .carousel-item {
+      display: flex;
+      align-items: center;
+      height: 192px;
+      font-family: Montserrat, sans-serif;
+      font-weight: 800;
+      font-size: 160px;
+      letter-spacing: -6.4px;
+      color: #fff;
+      margin: 0 30px;
+    }
+
+    /* Footer container / layout */
+    .footer-container {
+      background-color: #000;
+      width: 100%;
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 10px;
+      height: 280.203px;
+      overflow: hidden;
+      padding: 0;
+      position: relative;
+    }
+    .footer-left {
+      opacity: 1;
+      place-content: center flex-end;
+      align-items: center;
+      align-self: stretch;
+      display: flex;
+      flex: 1 0 0;
+      flex-flow: row nowrap;
+      gap: 10px;
+      height: auto;
+      overflow: hidden;
+      padding: 120px 24px 50px;
+      position: relative;
+      width: 1px;
+    }
+    .footer-left-bg {
+      position: absolute;
+      inset: 0;
+    }
+    .footer-left-content {
+      opacity: 1;
+      display: flex;
+      flex: 1 0 0;
+      flex-flow: column nowrap;
+      gap: 20px;
+      height: 95.6016px;
+      max-width: 500px;
+      overflow: hidden;
+      padding: 0;
+      position: relative;
+      width: 1px;
+    }
+    .footer-left-content p {
+      font-family: Montserrat, sans-serif;
+      margin: 0;
+      color: #fff;
+    }
+    .footer-right {
+      opacity: 1;
+      place-content: center;
+      align-items: center;
+      display: flex;
+      flex: 1 0 0;
+      flex-flow: row nowrap;
+      gap: 10px;
+      height: 280.203px;
+      overflow: hidden;
+      padding: 90px 24px 50px;
+      position: relative;
+      width: 1px;
+    }
+    .footer-right-content {
+      opacity: 1;
+      display: flex;
+      flex: 1 0 0;
+      flex-flow: column nowrap;
+      gap: 40px;
+      height: 140.203px;
+      max-width: 600px;
+      overflow: hidden;
+      padding: 0;
+      position: relative;
+      width: 1px;
+    }
+    .footer-menu {
+      display: flex;
+      flex-flow: row nowrap;
+      gap: 20px;
+      align-items: flex-start;
+      justify-content: space-between;
+      height: 80.6016px;
+      width: 100%;
+    }
+    .footer-col {
+      display: flex;
+      flex-flow: column nowrap;
+      gap: 15px;
+      height: 80.6016px;
+    }
+    .footer-col h5 {
+      font-family: Montserrat, sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0;
+    }
+    .footer-divider {
+      background-color: #262626;
+      height: 3px;
+      width: 50%;
+    }
+    .footer-col p,
+    .footer-col a {
+      font-family: Montserrat, sans-serif;
+      font-size: 14px;
+      margin: 0;
+      color: #fff;
+      text-decoration: none;
+    }
+    .footer-copyright {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+    }
+    .footer-copyright p {
+      font-family: Montserrat, sans-serif;
+      font-size: 14px;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div style="min-height: 100vh; width: auto; display: flex; flex-flow: column nowrap; background-color: #000; align-items: center; gap: 0; position: relative; overflow: hidden;">
+
+    <!-- HERO SECTION -->
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-bg">
+          <img src="anBn.png" alt="DaBaby Meme background" />
+        </div>
+        <div class="hero-overlay">
+          <div class="title-section">
+            <h1 class="dababy-title">$DABABY MEME</h1>
+            <a class="buy-button"
+               href="https://raydium.io/swap/?inputCurrency=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v&outputCurrency=NZRPr6d6jfLRv6trqTXCFCqJqLhMpaMQtAJVJb46SCP&inputAmount=313.721109&outputAmount=5439154.38769&fixed=in&inputMint=sol&outputMint=ATDLXn41q6ySnVDMrye1wcEnFrqMGD82tfEBnhYapump"
+               target="_blank" rel="noopener">
+              <div class="buy-button-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                  <path d="M181.66,133.66l-80,80a8,8,0,0,1-11.32-11.32L164.69,128,90.34,53.66a8,8,0,0,1,11.32-11.32l80,80A8,8,0,0,1,181.66,133.66Z"/>
+                </svg>
+              </div>
+              <p style="margin:0;">BUY IN CRYPTO</p>
+            </a>
+
+            <!-- Contract Address Area -->
+            <div class="solana-address">
+              <h4>Solana Contract Address</h4>
+              <div class="solana-address-box">
+                <!-- Clicking on the input or the button triggers the copy function -->
+                <input
+                  id="contractAddress"
+                  type="text"
+                  readonly
+                  value="Coming Soon"
+                  onclick="copyAddressWithNotification()"
+                />
+                <button type="button" onclick="copyAddressWithNotification()">
+                  <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="copy" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="width:14px; height:14px; fill:#000; color:#000;">
+                    <path d="M208 0H332.1c12.7 0 24.9 5.1 33.9 14.1l67.9 67.9c9 9 14.1 21.2 14.1 33.9V336c0 26.5-21.5 48-48 48H208c-26.5 0-48-21.5-48-48V48C160 21.5 181.5 0 208 0zm-160 128h80v64H64v256h192v-32h64v48c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V176c0-26.5 21.5-48 48-48z"/>
+                  </svg>
+                </button>
+                <!-- Toast Notification -->
+                <div id="copyToast">Address copied!</div>
+              </div>
+            </div>
+          </div><!-- /title-section -->
+        </div><!-- /hero-overlay -->
+      </div><!-- /hero-content -->
+    </div><!-- /hero-container -->
+
+    <!-- Spacer -->
+    <div style="height:89.0938px;"></div>
+
+    <!-- OFFICIAL MEME CAROUSEL -->
+    <div class="infinite-carousel">
+      <div class="carousel-track">
+        <div class="carousel-item">OFFICIAL MEME</div>
+        <div class="carousel-item">OFFICIAL MEME</div>
+        <div class="carousel-item">OFFICIAL MEME</div>
+        <div class="carousel-item">OFFICIAL MEME</div>
+        <div class="carousel-item">OFFICIAL MEME</div>
+        <div class="carousel-item">OFFICIAL MEME</div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-container">
+      <!-- Left side: dababy official memecoin -->
+      <div class="footer-left">
+        <div class="footer-left-bg">
+          <img decoding="async" loading="lazy"
+               sizes="max((100vw - 10px) / 2, 1px)"
+               srcset="
+                 https://framerusercontent.com/images/RGcydDlJ1TDKVAz3whZQotqAg.jpg?scale-down-to=512 512w,
+                 https://framerusercontent.com/images/RGcydDlJ1TDKVAz3whZQotqAg.jpg 900w
+               "
+               src="https://framerusercontent.com/images/RGcydDlJ1TDKVAz3whZQotqAg.jpg"
+               alt=""
+               style="display:block; width:100%; height:100%; object-fit:cover; object-position:center;" />
+        </div>
+        <div class="footer-left-content">
+          <p style="font-size:18px;">
+            DABABY OFFICIAL MEMECOIN
+          </p>
+          <p style="font-size:42px; font-weight:700;">
+            ONLY FOR THE GANG
+          </p>
+        </div>
+      </div>
+
+      <!-- Right side: Quick Links, Hello, etc. -->
+      <div class="footer-right">
+        <div class="footer-right-content">
+          <div class="footer-menu">
+            <div class="footer-col">
+              <h5>Quick Links</h5>
+              <div class="footer-divider"></div>
+              <p>
+                <a href="./terms.html" target="_blank">Terms &amp; Conditions</a>
+              </p>
+            </div>
+            <div class="footer-col">
+              <h5>Say Hello</h5>
+              <div class="footer-divider"></div>
+              <p>hello@dababymeme.com</p>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <p>
+              © 2025. All rights reserved by tygameme.com.
+              We are tracking any intention of piracy.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div><!-- end footer -->
+
+  </div><!-- end main root container -->
+
+  <!-- Preload scripts from your code -->
+  <link rel="modulepreload" fetchpriority="low"
+        href="https://framerusercontent.com/sites/3EDw4hKoTY1fBU6REZznRl/chunk-K543XXQK.mjs"/>
+  <link rel="modulepreload" fetchpriority="low"
+        href="https://framerusercontent.com/sites/3EDw4hKoTY1fBU6REZznRl/chunk-JR5VT52U.mjs"/>
+  <link rel="modulepreload" fetchpriority="low"
+        href="https://framerusercontent.com/sites/3EDw4hKoTY1fBU6REZznRl/chunk-Y5FTINFI.mjs"/>
+  <link rel="modulepreload" fetchpriority="low"
+        href="https://framerusercontent.com/sites/3EDw4hKoTY1fBU6REZznRl/71S41H3tEI2ktpZ_h4eyo_2afjCtGyq-CzWEYBahTPM.KS4NBACX.mjs"/>
+  <link rel="modulepreload" fetchpriority="low"
+        href="https://framerusercontent.com/sites/3EDw4hKoTY1fBU6REZznRl/chunk-SBBZTFU5.mjs"/>
+  <link rel="modulepreload" fetchpriority="low"
+        href="https://framerusercontent.com/sites/3EDw4hKoTY1fBU6REZznRl/chunk-LWQHL372.mjs"/>
+  <link rel="modulepreload" fetchpriority="low"
+        href="https://framerusercontent.com/sites/3EDw4hKoTY1fBU6REZznRl/chunk-6E22YKK6.mjs"/>
+  <link rel="modulepreload" fetchpriority="low"
+        href="https://framerusercontent.com/sites/3EDw4hKoTY1fBU6REZznRl/chunk-XOPXESVB.mjs"/>
+  <link rel="modulepreload" fetchpriority="low"
+        href="https://framerusercontent.com/sites/3EDw4hKoTY1fBU6REZznRl/script_main.NNJZKZII.mjs"/>
+
+  <!-- Script to handle copy & custom toast notification -->
+  <script>
+    function copyAddressWithNotification() {
+      const addressInput = document.getElementById('contractAddress');
+      // Use Clipboard API if available, otherwise fallback
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(addressInput.value)
+          .then(showToast)
+          .catch(err => {
+            console.error('Clipboard API failed, using fallback method:', err);
+            fallbackCopyText(addressInput);
+          });
+      } else {
+        fallbackCopyText(addressInput);
+      }
+    }
+    
+    function fallbackCopyText(inputElement) {
+      // Select the text field
+      inputElement.select();
+      inputElement.setSelectionRange(0, 99999); // For mobile devices
+      
+      try {
+        const successful = document.execCommand('copy');
+        if(successful) {
+          showToast();
+        } else {
+          console.error('Fallback copy command was unsuccessful');
+        }
+      } catch (err) {
+        console.error('Fallback: Unable to copy', err);
+      }
+    }
+    
+    function showToast() {
+      const copyToast = document.getElementById('copyToast');
+      copyToast.style.display = 'block';
+      copyToast.style.opacity = '1';
+      // Hide the toast after 2 seconds
+      setTimeout(() => {
+        copyToast.style.opacity = '0';
+        setTimeout(() => {
+          copyToast.style.display = 'none';
+        }, 300);
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
